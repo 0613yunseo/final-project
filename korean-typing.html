@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko"> <!--한국어로 설정 -->
+<head>
+    <meta charset="UTF-8"> 
+    <title>한영 타자기</title>
+    <style>
+        /* 전체 페이지의 기본 폰트와 정렬 설정 */
+        body {
+            font-family: Arial, sans-serif; /*폰트 설정*/
+            text-align: center; /*텍스트 가운데 정렬*/
+            margin: 20px; /*바깥 여백*/
+        }
+
+        header {
+            margin-bottom: 20px; /* 헤더 아래쪽 여백 */
+        }
+
+        /* 키보드 영역 초기 상태 숨김 + 정렬 설정 */
+        .keyboard {
+            display: none; /* 초기에는 보이지 않음 */
+            align-items: center; /* 중앙 정렬 */
+        }
+
+        /* 키보드 내부의 키들을 세로로 배치하고 줄 간격 조정 */
+        .keyboard #keyboard {
+            display: flex; /* 플렉스 박스 사용 */
+            flex-direction: column; /* 세로 방향 정렬 */
+            gap: 30px; /* 각 줄 사이 간격 */
+            align-items: center; /* 가운데 정렬 */
+        }
+
+        /* 각 키 버튼 스타일 */
+        .group1 label, .group2 label, .group3 label, .group4 label {
+            padding: 15px 20px; /* 안쪽 여백 */
+            margin: 5px; /* 바깥 여백 */
+            border-radius: 20px; /* 둥근 테두리 */
+            font-size: 18px; /* 글자 크기 */
+        }
+
+        /* 각 줄마다 다른 배경색 설정 */
+        .group1 label { background-color: #f8bfba; }
+        .group2 label { background-color: #fae9b8; } 
+        .group3 label { background-color: #b4f5c5; } 
+        .group4 label { background-color: #b8cef2; }
+
+        /* 키를 눌렀을 때 색상 변화 효과 */
+        .pressed {
+            background-color: #888 !important; /* 회색 배경 */
+            color: white; /* 흰색 글자 */
+        }
+
+        /* 출력창 스타일 지정 */
+        #displayWindow {
+            margin-top: 3px; /* 위쪽 여백 */
+            margin-bottom: 50px; /* 아래쪽 여백 */
+            width: 50%; /* 가로 너비 */
+            height: 100px; /* 세로 높이 */
+            background-color: white; /* 배경색 */
+            border: 2px solid #5c5c5c; /* 테두리 */
+            border-radius: 10px; /* 둥근 모서리 */
+            margin-left: auto; /* 중앙 정렬 */
+            margin-right: auto;
+            overflow-y: auto; /* 세로 스크롤 */
+            font-size: 20px; /* 글자 크기 */
+            text-align: left; /* 왼쪽 정렬 */
+        }
+
+        #textOutput {
+            white-space: pre-wrap; /* 줄바꿈 유지 */
+        }
+
+        /* 한글 모드일 때 배경색 설정 */
+        body.korean-mode {
+            background-color: #fbe6e6;
+        }
+
+        /* 영어 모드일 때 배경색 설정 */
+        body.english-mode {
+            background-color: #e0f0ff;
+        }
+
+        /* 한글 모드일 때 한글 키보드 보이게 설정 */
+        body.korean-mode #korean-keyboard {
+            display: block;
+        }
+
+        /* 영어 모드일 때 영어 키보드 보이게 설정 */
+        body.english-mode #english-keyboard {
+            display: block;
+        }
+    </style>
+</head>
+
+<body class="english-mode"> <!-- 기본 모드는 영어 모드로 시작 -->
+
+    <header>
+        <h1>타자기 프로젝트</h1>
+        <p>최윤서 2402213 한양여대 빅데이터과</p>
+    </header>
+
+    <!-- 출력 창 -->
+    <div id="displayWindow">
+        <div id="textOutput"></div>
+    </div>
+
+    <!-- 영어 키보드 영역 -->
+    <div id="english-keyboard" class="keyboard">
+        <div id="keyboard">
+            <div class="group1"> 
+                <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label>
+                <label>6</label><label>7</label><label>8</label><label>9</label><label>0</label>
+            </div>
+            <div class="group2">
+                <label>q</label><label>w</label><label>e</label><label>r</label><label>t</label>
+                <label>y</label><label>u</label><label>i</label><label>o</label><label>p</label>
+            </div>
+            <div class="group3">
+                <label>a</label><label>s</label><label>d</label><label>f</label><label>g</label>
+                <label>h</label><label>j</label><label>k</label><label>l</label><label>;</label>
+            </div>
+            <div class="group4">
+                <label>z</label><label>x</label><label>c</label><label>v</label><label>b</label>
+                <label>n</label><label>m</label><label>,</label><label>.</label><label>/</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 한글 키보드 영역 -->
+    <div id="korean-keyboard" class="keyboard">
+    <!-- div로 구조를 나눔-->
+        <div id="keyboard">
+            <div class="group1">
+            <!-- label으로 각 키를 표현 -->
+                <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label>
+                <label>6</label><label>7</label><label>8</label><label>9</label><label>0</label>
+            </div>
+            <div class="group2">
+                <label>ㅂ</label><label>ㅈ</label><label>ㄷ</label><label>ㄱ</label><label>ㅅ</label>
+                <label>ㅛ</label><label>ㅕ</label><label>ㅑ</label><label>ㅐ</label><label>ㅔ</label>
+            </div>
+            <div class="group3">
+                <label>ㅁ</label><label>ㄴ</label><label>ㅇ</label><label>ㄹ</label><label>ㅎ</label>
+                <label>ㅗ</label><label>ㅓ</label><label>ㅏ</label><label>ㅣ</label><label>;</label>
+            </div>
+            <div class="group4">
+                <label>ㅋ</label><label>ㅌ</label><label>ㅊ</label><label>ㅍ</label><label>ㅠ</label>
+                <label>ㅜ</label><label>ㅡ</label><label>,</label><label>.</label><label>/</label>
+            </div>
+        </div>
+    </div>
+
+    <!-- 자바스크립트 -->
+     <!-- 사용자의 키 입력을 감지 및 출력 / 누른 키에 시각적 효과-->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => { // 문서 로딩 완료 시 실행
+            const textOutput = document.getElementById("textOutput"); // 출력창을 가져옴
+            let isKorean = false; // 현재 모드 상태 저장 (false : 기본값 영어모드)
+
+            // 사용자가 누를 수 있는 키
+            const engKeys = "1234567890qwertyuiopasdfghjkl;zxcvbnm,./";
+            // 동일한 위치의 키를 한글 자판으로 나열 (영문 자리에 대응하는 한글)
+            const korKeys = "1234567890ㅂㅈㄷㄱㅅㅛㅕㅑㅐㅔㅁㄴㅇㄹㅎㅗㅓㅏㅣ;ㅋㅌㅊㅍㅠㅜㅡ,./";
+
+            // 키보드 눌림 감지 이벤트 (키보드를 눌렀을 때 실행)
+            document.addEventListener("keydown", (e) => {
+                const key = e.key.toLowerCase(); // 눌린 키값을 소문자로 변환
+                // 키보드 배열을 소문자로 지정해뒀기 때문에 소문자로 통일하기 위함
+
+                // '.' 키를 누르면 한영 모드 전환
+                if (key === ".") { // 만약 . 키를 누르면
+                    isKorean = !isKorean; // 상태 반전 (한영전환)
+                    document.body.classList.toggle("korean-mode", isKorean); 
+                    // 한글모드일 때 korean-mode 클래스 추가 아닐경우 제거
+                    document.body.classList.toggle("english-mode", !isKorean); 
+                    // 영어모드일 때 ... ([css]배경색 변경 또는 키보드 보이게)
+                    return;
+                }
+
+                
+                const index = engKeys.indexOf(key); 
+                // 입력한 키가 키보드에 있는지 확인 (입력 키가 없다면 -1)
+                if (index !== -1) {  // 유효한 키일 때 (-1이 아닐 때)
+                    const outputChar = isKorean ? korKeys[index] : key; 
+                    // 출력할 문자 결정 (한글모드면 korKeys[index], 영어 모드면 key)
+                    textOutput.textContent += outputChar; // 결정된 문자를 출력창에 추가
+                
+                    // 눌린 키 강조 효과 적용
+                    const activeKeyboard = isKorean ? document.querySelector("#korean-keyboard") 
+                    : document.querySelector("#english-keyboard");
+                    // 한글이면 한글키보드, 영어면 영어키보드 선택
+                    const labels = activeKeyboard.querySelectorAll("label");
+                    // label키 선택 
+
+
+                    //화면에 있는 모든 키를 검사해서 눌린 키와 똑같은 키가 있다면 눌린 효과를 주고 0.15초 후 효과제거
+                    labels.forEach(label => {
+                        // forEach : 배열 및 목록을 반복할 때 사용 
+                        if (label.textContent === outputChar) { // label 안 글자와 누른 글자랑 같다면
+                            label.classList.add("pressed"); // 누름효과 적용
+                            setTimeout(() => {
+                                label.classList.remove("pressed"); // 150ms 후 label에서 pressed 효과 제거
+                            }, 150);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

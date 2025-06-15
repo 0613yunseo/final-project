@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"> <!--한글 인코딩 설정-->
+    <title>타자기</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; /*전체 폰트 설정*/
+            text-align: center; /*본문 정렬 중앙*/
+            margin: 20px;/*바깥 여백 20px*/
+        }
+
+        header {
+            margin-bottom: 20px;/*헤더 아래 간격*/
+        }
+
+        #keyboard {
+            display: flex; /*플렉스박스로 키보드 정렬*/
+            /* 플렉스 박스란? display: flex를 사용하면, 
+            그 안의 요소들을 가로 또는 세로 방향으로 정렬하면서도 간격 조절, 
+            정렬 위치, 크기 조절 등을 쉽게 할 수 있게 함 */
+            flex-direction: column; /*세로방향 정렬*/
+            gap: 30px; /*각 줄 사이의 간격*/
+            align-items: center; /*자식 요소를 가운데 정렬*/
+            /* #keyboard는 부모박스 
+               아래 .group1, .group2 등은 자식*/
+           
+        }
+        
+        /*키보드 스타일 지정*/
+        .group1 label, .group2 label, .group3 label, .group4 label {
+            padding: 15px 20px; /*키 하나의 크기(키보드 한칸 사이즈 가로세로)*/
+            margin: 5px; /*키(키보드)의 간격*/
+            border-radius: 20px; /*모서리 둥글게*/
+            font-size: 18px; /*폰트사이즈 (키의 글자크기)*/
+        }
+        
+        
+        /*그롭 1-4 배경 색*/
+        .group1 label { background-color: #f8bfba; }
+        .group2 label { background-color: #fae9b8; } 
+        .group3 label { background-color: #b4f5c5; } 
+        .group4 label { background-color: #b8cef2; }
+
+        .pressed {/*키보드를 눌렀을 때 */
+            background-color: #888 !important; /* 눌렀을 때 배경색 회색*/
+            color: white;
+            /*배경 회색 글자색 흰색*/
+        }
+
+        #displayWindow {
+            margin-top: 3px; /*출력창 위 여백*/
+            margin-bottom: 50px; /* 출력창 아래 여백*/
+            width: 50%; /*출력창 너비*/
+            height: 100px;/* 출력탕 높이*/
+            background-color: white;/*배경색 흰색*/
+            border: 2px solid #5c5c5c; /*출력창 테두리*/
+            border-radius: 10px;/*둥근 테두리*/
+            /*가운데 정렬*/
+            margin-left: auto;
+            margin-right: auto;
+            overflow-y: auto;/*세로 스크롤 가능*/
+            font-size: 20px; /* 출력 글자 크기*/
+            text-align: left; /*왼쪽 정렬*/
+            }
+
+        #textOutput {
+            white-space: pre-wrap; /*줄바꿈 및 공백 유지*/
+        }
+       
+    </style>
+    
+</head>
+
+<body>
+    <header>
+        <h1>타자기 프로젝트</h1>
+        <p>최윤서 2402213 한양여대 빅데이터과</p>
+    </header>
+
+    <!--타자기 출력창-->
+    <div id="displayWindow">
+        <div id="textOutput"></div>
+    </div>
+
+    <!--타자기 키보드 모양 -->
+    <div id="keyboard">
+		    <!-- 숫자키-->
+        <div class="group1">
+            <label>1</label><label>2</label><label>3</label><label>4</label><label>5</label>
+            <label>6</label><label>7</label><label>8</label><label>9</label><label>0</label>
+        </div>
+        <!-- QWERTY 윗줄 -->
+        <div class="group2">
+            <label>q</label><label>e</label><label>w</label><label>r</label><label>t</label>
+            <label>y</label><label>u</label><label>i</label><label>o</label><label>p</label>
+        </div>
+        <!-- 중간줄 -->
+        <div class="group3">
+            <label>a</label><label>s</label><label>d</label><label>f</label><label>g</label>
+            <label>h</label><label>j</label><label>k</label><label>l</label><label>;</label>
+        </div>
+        <!-- 아래줄 -->
+        <div class="group4">
+            <label>z</label><label>x</label><label>c</label><label>v</label><label>b</label>
+            <label>n</label><label>m</label><label>,</label><label>.</label><label>/</label>
+        </div>
+    </div>
+
+    
+		<!-- 동작 처리 스크립트 -->
+    <script>
+    // DOM 로드 완료 시 실행
+        document.addEventListener("DOMContentLoaded", () => {
+            const textOutput = document.getElementById("textOutput"); // 출력 요소
+            const allowedKeys = "1234567890qwertyuiopasdfghjkl;zxcvbnm,./";// 허용된 키
+
+            // 키보드 입력 처리
+            document.addEventListener("keydown", (e) => {
+                const key = e.key.toLowerCase(); // 입력된 키를 소문자로 변환
+                if (allowedKeys.includes(key)) {
+                    textOutput.textContent += key; // 출력창에 문자 추가
+                    // 눌린 키 하이라이트 효과
+                    const labels = document.querySelectorAll("#keyboard label");
+                    labels.forEach(label => {
+                        if (label.textContent === key) {
+                            label.classList.add("pressed");
+                            setTimeout(() => {
+                                label.classList.remove("pressed");
+                            }, 150); // 0.15초 후 원상복귀
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
