@@ -1,0 +1,91 @@
+/* 전체 화면 구성용 */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+/* GNB 스타일 */
+.gnb {
+  background-color: #333;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gnb h3 {
+  margin: 0;
+  color: white;
+}
+
+.menu-links a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.menu-links a:hover {
+  text-decoration: underline;
+}
+
+/* 메인 콘텐츠 영역 */
+.main {
+  flex: 1;
+  padding: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* 푸터 */
+.footer {
+  background-color: #f2f2f2;
+  text-align: center;
+  padding: 15px;
+}
+.toggle-section {
+  margin-bottom: 20px;
+}
+
+.toggle-button {
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  font-size: 16px;
+  background-color: #eee;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+.toggle-button:hover {
+  background-color: #ddd;
+}
+
+.toggle-content {
+  display: none;
+  padding: 10px 0;
+}
+
+.link-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #0073aa;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.link-button:hover {
+  background-color: #005b8a;
+}
+.guide {
+  margin-top: 80px;
+  margin-bottom: 30px;
+  font-size: 16px;
+  color: #555;
+}

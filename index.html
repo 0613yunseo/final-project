@@ -1,33 +1,72 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <title>기말 과제 통합 사이트</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <!-- GNB -->
-  <nav style="background: #333; padding: 10px;">
-    <a href="english-typing.html" style="color: white; margin-right: 20px;">영문 타자기</a>
-    <a href="korean-typing.html" style="color: white; margin-right: 20px;">한글 타자기</a>
-    <a href="calculator.html" style="color: white; margin-right: 20px;">계산기</a>
-    <a href="phone.html" style="color: white;">전화기</a>
-  </nav>
+  <head>
+    <meta charset="UTF-8">
+    <title>웹개발 기말과제</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
 
-  <!-- Site Map or 초기 페이지 내용 -->
-  <main style="padding: 20px;">
-    <h1>기말 과제 사이트맵</h1>
-    <ul>
-      <li><a href="https://0613yunseo.github.io/HY-Eng/">영문 타자기</a></li>
-      <li><a href="https://0613yunseo.github.io/HY-ko/">한글 타자기</a></li>
-      <li><a href="https://0613yunseo.github.io/HY-calculator/">계산기</a></li>
-      <li><a href="https://0613yunseo.github.io/HY-phone/">전화기</a></li>
-    </ul>
-  </main>
+  <body>
+    <!-- GNB -->
+    <nav class="gnb">
+      <h3>HYWU_YUNSEO_WEB</h3>
+      <div class="menu-links">
+        <a href="english-typing.html">영문 타자기</a>
+        <a href="korean-typing.html">한글 타자기</a>
+        <a href="calculator.html">계산기</a>
+        <a href="phone.html">전화기</a>
+      </div>
+    </nav>
 
-  <!-- Footer -->
-  <footer style="background: #f2f2f2; padding: 10px; text-align: center;">
-    <p>소속: 빅데이터과 | 학번: 20231234 | 이름: 최윤서</p>
-  </footer>
-</body>
+    <!-- Site Map or 초기 페이지 내용 -->
+    <main class="main">
+      <h1>2402213 최윤서의 웹사이트에 오신걸 환영합니다</h1>
+      <p class="guide">아래 항목을 클릭하면 상세 링크 버튼이 나타납니다</p>
+
+      <div class="toggle-section">
+        <button class="toggle-button">영문 타자기 ▼</button>
+        <div class="toggle-content">
+          <a href="https://0613yunseo.github.io/HY-Eng/" target="_blank" class="link-button">바로가기</a>
+        </div>
+      </div>
+
+      <div class="toggle-section">
+        <button class="toggle-button">한글 타자기 ▼</button>
+        <div class="toggle-content">
+          <a href="https://0613yunseo.github.io/HY-ko/" target="_blank" class="link-button">바로가기</a>
+        </div>
+      </div>
+
+      <div class="toggle-section">
+        <button class="toggle-button">계산기 ▼</button>
+        <div class="toggle-content">
+          <a href="https://0613yunseo.github.io/HY-calculator/" target="_blank" class="link-button">바로가기</a>
+        </div>
+      </div>
+
+      <div class="toggle-section">
+        <button class="toggle-button">전화기 ▼</button>
+        <div class="toggle-content">
+          <a href="https://0613yunseo.github.io/HY-phone/" target="_blank" class="link-button">바로가기</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>소속: 빅데이터과 | 학번: 20231234 | 이름: 최윤서</p>
+    </footer>
+  </body>
+
+  <script>
+    const buttons = document.querySelectorAll('.toggle-button');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+  </script>
+
 </html>
